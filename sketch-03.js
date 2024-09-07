@@ -2,24 +2,22 @@
 //const math = require('canvas-sketch-util/math');
 //const random = require('canvas-sketch-util/random');
 
-
 import canvasSketch from 'canvas-sketch';
-import * as math from 'canvas-sketch-util/math.js';  // Add .js extension
-import * as random from 'canvas-sketch-util/random.js';  // Add .js extension
+import * as math from 'canvas-sketch-util/math.js';
+import * as random from 'canvas-sketch-util/random.js';
 
 const settings = {
-  dimensions: [1080, 1080],
+  dimensions: null, // Make the canvas responsive to window size
   animate: true
 };
 
 const getRandomColor = () => {
   const getRandomNumber = () => Math.floor(Math.random() * 256);
   return 'rgb(' + getRandomNumber() + ',' + getRandomNumber() + ',' + getRandomNumber() + ')';
-}
+};
 
 const sketch = ({ context, width, height }) => {
-
-  const agents = []
+  const agents = [];
 
   for (let i = 0; i < 100; i++) {
     const x = random.range(0, width);
@@ -28,18 +26,18 @@ const sketch = ({ context, width, height }) => {
     agents.push(new Agent(x, y));
   }
 
-  const lineColor = []
+  const lineColor = [];
 
   for (let i = 0; i < agents.length; i++) {
     lineColor.push(getRandomColor());
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = 'white ';
+    context.fillStyle = 'white';
     context.fillRect(0, 0, width, height);
 
     for (let i = 0; i < agents.length; i++) {
-      const fromAgent = agents[i]
+      const fromAgent = agents[i];
 
       for (let j = i + 1; j < agents.length; j++) {
         const toAgent = agents[j];
@@ -84,8 +82,8 @@ class Vector {
 class Agent {
   constructor(x, y) {
     this.radius = random.range(4, 12);
-    this.point = new Vector(x, y)
-    this.velocity = new Vector(random.range(-0.5, 0.5), random.range(-0.5, 0.5))
+    this.point = new Vector(x, y);
+    this.velocity = new Vector(random.range(-0.5, 0.5), random.range(-0.5, 0.5));
   }
 
   update() {
