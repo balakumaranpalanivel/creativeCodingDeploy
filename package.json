@@ -1,0 +1,14 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "canvas-sketch": "^0.7.7",
+    "canvas-sketch-cli": "^1.11.21",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "canvas-sketch-util": "^1.10.0",
+    "tweakpane": "^3.1.10"
+  }
+}

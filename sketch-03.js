@@ -1,9 +1,14 @@
-const canvasSketch = require('canvas-sketch');
-const math = require('canvas-sketch-util/math');
-const random = require('canvas-sketch-util/random');
+//const canvasSketch = require('canvas-sketch');
+//const math = require('canvas-sketch-util/math');
+//const random = require('canvas-sketch-util/random');
+
+
+import canvasSketch from 'canvas-sketch';
+import * as math from 'canvas-sketch-util/math.js';  // Add .js extension
+import * as random from 'canvas-sketch-util/random.js';  // Add .js extension
 
 const settings = {
-  dimensions: [ 1080, 1080  ],
+  dimensions: [1080, 1080],
   animate: true
 };
 
@@ -16,7 +21,7 @@ const sketch = ({ context, width, height }) => {
 
   const agents = []
 
-  for (let i=0; i < 100; i++) {
+  for (let i = 0; i < 100; i++) {
     const x = random.range(0, width);
     const y = random.range(0, height);
 
@@ -25,7 +30,7 @@ const sketch = ({ context, width, height }) => {
 
   const lineColor = []
 
-  for ( let i=0; i<agents.length; i++) {
+  for (let i = 0; i < agents.length; i++) {
     lineColor.push(getRandomColor());
   }
 
@@ -33,10 +38,10 @@ const sketch = ({ context, width, height }) => {
     context.fillStyle = 'white ';
     context.fillRect(0, 0, width, height);
 
-    for(let i=0; i < agents.length; i++) {
+    for (let i = 0; i < agents.length; i++) {
       const fromAgent = agents[i]
 
-      for( let j = i + 1; j < agents.length; j++) {
+      for (let j = i + 1; j < agents.length; j++) {
         const toAgent = agents[j];
 
         context.strokeStyle = lineColor[i];
@@ -72,7 +77,7 @@ class Vector {
   getDistance(v) {
     const dx = this.x - v.x;
     const dy = this.y - v.y;
-    return Math.sqrt(dx*dx + dy*dy);
+    return Math.sqrt(dx * dx + dy * dy);
   }
 }
 
@@ -80,7 +85,7 @@ class Agent {
   constructor(x, y) {
     this.radius = random.range(4, 12);
     this.point = new Vector(x, y)
-    this.velocity = new Vector(random.range(-0.5,0.5), random.range(-0.5,0.5))
+    this.velocity = new Vector(random.range(-0.5, 0.5), random.range(-0.5, 0.5))
   }
 
   update() {
@@ -89,8 +94,8 @@ class Agent {
   }
 
   bounce(width, height) {
-    if (this.point.x <= 0 || this.point.x >= width) this.velocity.x  *= -1;
-    if (this.point.y <= 0 || this.point.y >= height) this.velocity.y  *= -1;
+    if (this.point.x <= 0 || this.point.x >= width) this.velocity.x *= -1;
+    if (this.point.y <= 0 || this.point.y >= height) this.velocity.y *= -1;
   }
 
   draw(context) {
@@ -100,7 +105,7 @@ class Agent {
 
     context.lineWidth = 4;
     context.beginPath();
-    context.arc( 0, 0, this.radius, 0, Math.PI*2);
+    context.arc(0, 0, this.radius, 0, Math.PI * 2);
     context.fill();
     context.stroke();
 
